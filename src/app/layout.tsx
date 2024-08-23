@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import { type Metadata } from "next";
+import Navigation from "~/_components/Navigation";
 
 export const metadata: Metadata = {
   title: "Vacation Manager",
@@ -17,7 +18,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body>{children}</body>
+      <body>
+        <Navigation />
+        <div className="h-[calc(100vh-68px)]">{children}</div>
+      </body>
     </html>
   );
 }
