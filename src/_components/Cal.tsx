@@ -14,10 +14,6 @@ interface CalendarProps {
 }
 
 const Cal = ({ events }: CalendarProps) => {
-  useEffect(() => {
-    console.log(events);
-  });
-
   return (
     <div className="w-[calc(100%/2)]">
       <FullCalendar
