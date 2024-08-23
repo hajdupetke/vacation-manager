@@ -9,7 +9,6 @@ interface CalendarProps {
     title: string | undefined;
     start: string | undefined;
     end: string | undefined;
-    state: LeaveState | undefined;
   }[];
 }
 
