@@ -1,10 +1,11 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
-RUN mkdir app
-COPY ../prisma  ./app
-COPY ../package.json ../package-lock.json ./app/
-WORKDIR /app
+RUN mkdir application
+COPY ../prisma  ./application
+COPY ../package.json ../package-lock.json ./application/
+WORKDIR /application
 
 RUN npm ci
+RUN npx prisma generatx
 
 CMD ["npm", "run", "dev"] 
