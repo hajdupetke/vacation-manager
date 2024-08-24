@@ -1,6 +1,6 @@
 import { signOut } from "~/server/auth";
 
-export function SignOut() {
+export default function SignOut() {
   return (
     <form
       action={async () => {

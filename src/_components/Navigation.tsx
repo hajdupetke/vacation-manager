@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { auth } from "~/server/auth";
 import SignIn from "./SignIn";
-import { SignOut } from "./SignOut";
+import SignOut from "./SignOut";
 import { UserRole } from "@prisma/client";
 
 const Navigation = async () => {

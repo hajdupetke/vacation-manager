@@ -1,8 +1,6 @@
 "use client";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { LeaveRequest, LeaveState } from "@prisma/client";
-import { useEffect } from "react";
 
 interface CalendarProps {
   events: {
@@ -12,9 +10,9 @@ interface CalendarProps {
   }[];
 }
 
-const Cal = ({ events }: CalendarProps) => {
+const Calendar = ({ events }: CalendarProps) => {
   return (
-    <div className="w-[calc(100%/2)]">
+    <div className="w-1/2">
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
@@ -27,4 +25,4 @@ const Cal = ({ events }: CalendarProps) => {
   );
 };
 
-export default Cal;
+export default Calendar;
