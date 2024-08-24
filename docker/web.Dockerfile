@@ -6,6 +6,6 @@ COPY ../package.json ../package-lock.json ./application/
 WORKDIR /application
 
 RUN npm ci
-RUN npx prisma generatx
+RUN npx prisma generate
 
 CMD ["npm", "run", "dev"] 

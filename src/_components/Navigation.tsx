@@ -32,10 +32,12 @@ const Navigation = async () => {
             </>
           )}
           <li>
-            <Link href={"/settings"}>
-              Settings{" "}
-              <Image src={SettingsIcon} width={20} alt="Settings icon" />
-            </Link>
+            {session?.user && (
+              <Link href={"/settings"}>
+                Settings{" "}
+                <Image src={SettingsIcon} width={20} alt="Settings icon" />
+              </Link>
+            )}
           </li>
           <li>{!session?.user ? <SignIn /> : <SignOut />}</li>
         </ul>
@@ -76,10 +78,12 @@ const Navigation = async () => {
             </>
           )}
           <li>
-            <Link href={"/settings"}>
-              Settings{" "}
-              <Image src={SettingsIcon} width={20} alt="Settings icon" />
-            </Link>
+            {session?.user && (
+              <Link href={"/settings"}>
+                Settings{" "}
+                <Image src={SettingsIcon} width={20} alt="Settings icon" />
+              </Link>
+            )}
           </li>
           <li>{!session?.user ? <SignIn /> : <SignOut />}</li>
         </ul>

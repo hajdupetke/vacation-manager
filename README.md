@@ -1,29 +1,52 @@
-# Create T3 App
+# Vacation Manager
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a web application written in Next.js using Prisma, FullCalendar, Next-Auth, Tailwind and DaisyUI.
 
-## What's next? How do I make an app with this?
+## Application setup
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Clone the repo
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+`git clone https://github.com/hajdupetke/vacation-manager`
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Rename the `.env.example` file to `.env`.
 
-## Learn More
+Get Google API keys for authentication from [here](https://console.cloud.google.com/apis/credentials) and paste it in the `.env` file. [Next-Auth docs for Google](https://next-auth.js.org/providers/google).
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Create a [Resend](https://resend.com/) account, generate an API key and paste it in the `.env` file.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Running the application
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+The application is run using Docker, if you don't have docker installed you can install it from [here](https://docs.docker.com/engine/install/). With Docker installed running this command starts the application and the database.
 
-## How do I deploy this?
+`docker-compose -f docker/docker-compose.yml --env-file .env up`
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Using the application
+
+### Homepage
+
+After starting up the application the you start out on the homepage with the Calendar view. On the top right of the page the is a Sign In button to sign in to the application using your Google account. After authenticating an Administrator user needs to approve your registration in order to access other features of the app. 
+
+After approval the will be a new button on the homepage to the north of the calendar. Clicking this button takes you to a new page where you can create a new leave request by selecting a range of dates and a category. 
+
+## Users page
+
+Only Administrator users can access this page.
+
+On this page there will be a list of all the registered users. Clicking the 'Edit' button next to one of the users takes you to that user's page, where the user's categories and the user's role can be modified.
+
+## Leave Requests page
+
+Only Adminsitrator users can access this page.
+
+On this page there will be a list of all the leave requests. The administrator can approve or decline a request, doing so will send an email to the appropiate user if they didn't disable notifications under the Settings page.
+
+## Leave Categories page
+
+Only Administrator users can access this page.
+
+On this page there will be a list of all the categories. The administrator can delete a category by clicking the 'Delete' button right next to category. In order to create a category click the 'Create new' button and fill out the name field and click 'Create' button.
+
+
+## Settings page
+
+Settings page where the user can select if they want to recieve email notification when a requests status is changed.
