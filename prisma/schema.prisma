@@ -59,7 +59,7 @@ model User {
     sessions      Session[]
     leaveRequests LeaveRequest[]
     role          UserRole  @default(VIEWER)
-    categories    CategoriesOnUser[]
+    categories    LeaveCategory[]
 }
 
 model VerificationToken {
@@ -91,14 +91,6 @@ model LeaveCategory {
     id            Int @id @default(autoincrement())
     name          String
     leaveRequests LeaveRequest[] 
-    users         CategoriesOnUser[]
+    users         User[]
 }
 
-model CategoriesOnUser {
-    categoryId    Int
-    category      LeaveCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    userId        String
-    user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    @@id([userId, categoryId])
-}

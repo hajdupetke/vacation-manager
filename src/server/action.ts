@@ -3,7 +3,7 @@
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { User } from "@prisma/client";
+import { User, UserRole } from "@prisma/client";
 import { auth } from "./auth";
 
 export const getEvents = async () => {
@@ -80,4 +80,58 @@ export const createLeaveRequest = async (
 
   //   },
   // });
+};
+
+export const getUsers = async () => {
+  const session = await auth();
+  const users = await db.user.findMany({
+    where: { NOT: [{ id: session?.user?.id }] },
+  });
+
+  return users;
+};
+
+export const getUser = async (id: string) => {
+  const user = await db.user.findFirst({ where: { id: id } });
+
+  return user;
+};
+
+export const getUserCategories = async (id: string) => {
+  const session = await auth();
+
+  const user = await db.user.findFirst({
+    where: { id: id },
+    include: { categories: true },
+  });
+
+  return user?.categories;
+};
+
+export const getAllCategoires = async () => {
+  const categories = await db.leaveCategory.findMany();
+
+  return categories;
+};
+
+export const updateUser = async (formData: FormData) => {
+  const role = formData.get("role") as UserRole;
+  const categories = formData.getAll("category");
+  const categoryIds = categories.map((id) => {
+    return { id: parseInt(id as string) };
+  });
+  const userId = formData.get("userId") as string;
+
+  const categoriesDB = await db.user.update({
+    where: { id: userId },
+    data: {
+      role: role,
+      categories: {
+        set: categoryIds,
+      },
+    },
+  });
+
+  console.log(role, categoryIds, userId);
+  redirect("/users");
 };
