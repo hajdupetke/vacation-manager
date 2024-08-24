@@ -165,3 +165,13 @@ export const declineReq = async (reqId: number) => {
   revalidatePath("/leave-request");
   revalidatePath("/");
 };
+
+export const saveSettings = async (formData: FormData) => {
+  const notifications = formData.get("notifications") == "on";
+  const session = await auth();
+  const user = await db.user.update({
+    where: { id: session?.user?.id },
+    data: { notifications: notifications },
+  });
+  redirect("/");
+};

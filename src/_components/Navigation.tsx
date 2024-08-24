@@ -4,6 +4,8 @@ import { auth } from "~/server/auth";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
 import { UserRole } from "@prisma/client";
+import Image from "next/image";
+import SettingsIcon from "public/assets/settings.svg";
 
 const Navigation = async () => {
   const session = await auth();
@@ -29,7 +31,12 @@ const Navigation = async () => {
               </li>
             </>
           )}
-
+          <li>
+            <Link href={"/settings"}>
+              Settings{" "}
+              <Image src={SettingsIcon} width={20} alt="Settings icon" />
+            </Link>
+          </li>
           <li>{!session?.user ? <SignIn /> : <SignOut />}</li>
         </ul>
       </div>

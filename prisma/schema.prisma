@@ -60,6 +60,7 @@ model User {
     leaveRequests LeaveRequest[]
     role          UserRole  @default(VIEWER)
     categories    LeaveCategory[]
+    notifications Boolean @default(true)
 }
 
 model VerificationToken {

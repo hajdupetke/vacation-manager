@@ -51,7 +51,7 @@ export default async function UsersPage() {
                   </td>
                   <th>
                     <Link
-                      className="btn btn-warning btn-xs"
+                      className="btn btn-warning btn-sm"
                       href={`/users/edit/${user.id}`}
                     >
                       Edit
