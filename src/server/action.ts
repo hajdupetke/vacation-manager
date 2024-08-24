@@ -3,15 +3,20 @@
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { User, UserRole } from "@prisma/client";
+import { User, UserRole, LeaveState } from "@prisma/client";
 import { auth } from "./auth";
 
-export const getEvents = async () => {
+export const getEvents = async (where = {}) => {
   noStore();
 
   const data = await db.leaveRequest.findMany({
+    where: where,
     include: {
       user: true,
+      category: true,
+    },
+    orderBy: {
+      id: "asc",
     },
   });
 
@@ -21,7 +26,7 @@ export const getEvents = async () => {
 export const getEventsForCalendar = async () => {
   noStore();
 
-  const data = await getEvents();
+  const data = await getEvents({ NOT: [{ state: LeaveState.DECLINED }] });
 
   const events = await data.map((event) => {
     return {
@@ -139,4 +144,24 @@ export const updateUser = async (formData: FormData) => {
 
   console.log(role, categoryIds, userId);
   redirect("/users");
+};
+
+export const acceptRequest = async (reqId: number) => {
+  const request = await db.leaveRequest.update({
+    where: { id: reqId },
+    data: { state: LeaveState.ACCEPTED },
+  });
+
+  revalidatePath("/leave-request");
+  revalidatePath("/");
+};
+
+export const declineReq = async (reqId: number) => {
+  const request = await db.leaveRequest.update({
+    where: { id: reqId },
+    data: { state: LeaveState.DECLINED },
+  });
+
+  revalidatePath("/leave-request");
+  revalidatePath("/");
 };
