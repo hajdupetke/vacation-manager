@@ -11,7 +11,6 @@ export default async function LeaveRequestsPage() {
   if (!session?.user || session?.user?.role != UserRole.ADMINISTRATOR)
     redirect("/");
   const events = await getEvents();
-  console.log(events);
 
   return (
     <main className="flex h-full w-full flex-col items-center justify-center">

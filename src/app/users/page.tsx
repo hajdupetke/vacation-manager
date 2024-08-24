@@ -10,7 +10,6 @@ export default async function UsersPage() {
     redirect("/");
 
   const users = await getUsers();
-  console.log(users);
 
   return (
     <main className="flex h-full w-full items-center justify-center">

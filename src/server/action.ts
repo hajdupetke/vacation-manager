@@ -5,6 +5,11 @@ import { db } from "./db";
 import { redirect } from "next/navigation";
 import { User, UserRole, LeaveState } from "@prisma/client";
 import { auth } from "./auth";
+import { EmailTemplate } from "~/_components/EmailTemplate";
+import { Resend } from "resend";
+import { env } from "~/env";
+
+const resend = new Resend(env.RESEND_API_KEY);
 
 export const getEvents = async (where = {}) => {
   noStore();
@@ -71,8 +76,6 @@ export const createLeaveRequest = async (
   categoryId: number,
 ) => {
   const session = await auth();
-  console.log(session?.user);
-  console.log(startDate, endDate);
 
   const newEvent = await db.leaveRequest.create({
     data: {
@@ -142,7 +145,6 @@ export const updateUser = async (formData: FormData) => {
     },
   });
 
-  console.log(role, categoryIds, userId);
   redirect("/users");
 };
 
@@ -150,7 +152,30 @@ export const acceptRequest = async (reqId: number) => {
   const request = await db.leaveRequest.update({
     where: { id: reqId },
     data: { state: LeaveState.ACCEPTED },
+    include: { user: true },
   });
+
+  if (request.user.notifications) {
+    try {
+      const { data, error } = await resend.emails.send({
+        from: "Vacation Manager <onboarding@resend.dev>",
+        to: [request.user.email as string],
+        subject: "Leave Request Status Modified",
+        react: EmailTemplate({
+          name: request.user.name as string,
+          startDate: request.startDate as string,
+          endDate: request.endDate as string,
+          status: "accepted",
+        }),
+      });
+
+      if (error) console.error(error);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   revalidatePath("/leave-request");
   revalidatePath("/");
@@ -160,7 +185,30 @@ export const declineReq = async (reqId: number) => {
   const request = await db.leaveRequest.update({
     where: { id: reqId },
     data: { state: LeaveState.DECLINED },
+    include: { user: true },
   });
+
+  if (request.user.notifications) {
+    try {
+      const { data, error } = await resend.emails.send({
+        from: "Vacation Manager <onboarding@resend.dev>",
+        to: [request.user.email as string],
+        subject: "Leave Request Status Modified",
+        react: EmailTemplate({
+          name: request.user.name as string,
+          startDate: request.startDate as string,
+          endDate: request.endDate as string,
+          status: "declined",
+        }),
+      });
+
+      if (error) console.error(error);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   revalidatePath("/leave-request");
   revalidatePath("/");

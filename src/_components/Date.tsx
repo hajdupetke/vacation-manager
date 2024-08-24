@@ -17,9 +17,6 @@ const Date = () => {
     const params = new URLSearchParams(searchParams);
     if (newValue?.endDate == undefined || newValue.startDate == undefined)
       throw new Error("Date is wrong!");
-
-    console.log(newValue?.startDate?.toISOString().split("T")[0]);
-    console.log(newValue?.endDate?.toISOString().split("T")[0]);
     const endDateForDb = new window.Date();
 
     endDateForDb?.setDate(newValue?.endDate?.getDate() + 1);
