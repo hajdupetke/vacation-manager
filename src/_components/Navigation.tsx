@@ -24,6 +24,9 @@ const Navigation = async () => {
               <li>
                 <Link href={"/leave-requests"}>Leave Requests</Link>
               </li>
+              <li>
+                <Link href={"/leave-categories"}>Leave Categories</Link>
+              </li>
             </>
           )}
 
