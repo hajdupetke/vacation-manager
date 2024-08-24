@@ -63,23 +63,30 @@ export const createCategory = async (formData: FormData) => {
 export const createLeaveRequest = async (
   startDate: string,
   endDate: string,
+  categoryId: number,
 ) => {
   const session = await auth();
   console.log(session?.user);
   console.log(startDate, endDate);
 
-  // const newEvent = await db.leaveRequest.create({
-  //   data: {
-  //     startDate: startDate,
-  //     endDate: endDate,
-  //     user: {
-  //       connect: {
-  //         id: session?.user?.id,
-  //       },
-  //     },
+  const newEvent = await db.leaveRequest.create({
+    data: {
+      startDate: startDate,
+      endDate: endDate,
+      user: {
+        connect: {
+          id: session?.user?.id,
+        },
+      },
+      category: {
+        connect: {
+          id: categoryId,
+        },
+      },
+    },
+  });
 
-  //   },
-  // });
+  redirect("/");
 };
 
 export const getUsers = async () => {
