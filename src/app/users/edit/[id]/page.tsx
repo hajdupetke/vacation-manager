@@ -26,7 +26,7 @@ export default async function EditUserPage({
 
   return (
     <main className="flex h-full flex-col items-center justify-center">
-      <form className="w-1/3" action={updateUser}>
+      <form className="w-2/3 md:w-1/2 lg:w-1/3" action={updateUser}>
         <div className="my-2 flex items-center gap-4">
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">

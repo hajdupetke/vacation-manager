@@ -12,7 +12,7 @@ interface CalendarProps {
 
 const Calendar = ({ events }: CalendarProps) => {
   return (
-    <div className="w-1/2">
+    <div className="w-full">
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"

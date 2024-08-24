@@ -10,14 +10,16 @@ export default async function HomePage() {
 
   return (
     <main className="flex h-full flex-col items-center justify-center">
-      {session?.user?.role != UserRole.VIEWER && (
-        <div className="my-4 flex w-1/2 justify-end">
-          <Link href={"/leave-requests/create"} className="btn btn-primary">
-            Create New Leave Request
-          </Link>
-        </div>
-      )}
-      <Cal events={events} />
+      <div className="w-10/12 lg:w-1/2">
+        {session?.user?.role != UserRole.VIEWER && (
+          <div className="my-4 flex w-full justify-end">
+            <Link href={"/leave-requests/create"} className="btn btn-primary">
+              Create New Leave Request
+            </Link>
+          </div>
+        )}
+        <Cal events={events} />
+      </div>
     </main>
   );
 }

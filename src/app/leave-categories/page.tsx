@@ -14,7 +14,8 @@ export default async function LeaveCategoriesPage() {
 
   return (
     <main className="flex h-full flex-col items-center justify-start pt-6">
-      <div className="flex w-1/2 justify-end">
+      <div className="flex w-1/2 items-center justify-center gap-6">
+        <h1 className="my-4 text-4xl font-bold">Leave Categories</h1>
         <Link className="btn btn-primary" href={"/leave-categories/create"}>
           Create new
         </Link>

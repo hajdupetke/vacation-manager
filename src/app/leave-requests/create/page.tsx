@@ -17,7 +17,7 @@ export default async function LeaveRequestCreatePage({
     <main className="flex h-full flex-col items-center justify-center">
       <h1 className="text-2xl font-bold">Create new leave request</h1>
       <form
-        className="form-control w-full max-w-md"
+        className="form-control w-10/12 max-w-md md:w-full"
         action={async (formData: FormData) => {
           "use server";
           if (

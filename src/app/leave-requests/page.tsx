@@ -15,7 +15,7 @@ export default async function LeaveRequestsPage() {
   return (
     <main className="flex h-full w-full flex-col items-center justify-center">
       <h1 className="my-4 text-4xl font-bold">Leave Requests</h1>
-      <div className="overflow-x-auto">
+      <div className="w-10/12 overflow-auto md:w-11/12">
         <table className="table">
           {/* head */}
           <thead>

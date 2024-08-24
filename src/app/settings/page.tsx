@@ -8,7 +8,7 @@ export default async function SettingsPage() {
 
   return (
     <main className="flex h-full w-full flex-col items-center justify-center">
-      <form className="form-control" action={saveSettings}>
+      <form className="form-control w-10/12 md:w-full" action={saveSettings}>
         <label className="label cursor-pointer gap-2">
           <span className="label-text">
             Send me email notifications when status of my request changes
