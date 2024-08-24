@@ -84,9 +84,7 @@ export const createLeaveRequest = async (
 
 export const getUsers = async () => {
   const session = await auth();
-  const users = await db.user.findMany({
-    where: { NOT: [{ id: session?.user?.id }] },
-  });
+  const users = await db.user.findMany();
 
   return users;
 };
@@ -125,7 +123,7 @@ export const updateUser = async (formData: FormData) => {
   const categoriesDB = await db.user.update({
     where: { id: userId },
     data: {
-      role: role,
+      ...(role != null ? { role: role } : {}),
       categories: {
         set: categoryIds,
       },

@@ -21,11 +21,7 @@ export default async function EditUserPage({
 
   if (user == null) return <h1>User not found</h1>;
 
-  if (
-    !session?.user ||
-    session?.user?.role != UserRole.ADMINISTRATOR ||
-    session.user.id == user.id
-  )
+  if (!session?.user || session?.user?.role != UserRole.ADMINISTRATOR)
     redirect("/");
 
   return (
@@ -49,6 +45,7 @@ export default async function EditUserPage({
           className="select select-bordered w-full"
           name="role"
           defaultValue={user.role}
+          disabled={user.id === session.user.id}
         >
           {userRoles.map((userRole) => (
             <option value={userRole} key={userRole}>
