@@ -34,10 +34,13 @@ export const getEventsForCalendar = async () => {
   const data = await getEvents({ NOT: [{ state: LeaveState.DECLINED }] });
 
   const events = await data.map((event) => {
+    const endDate = new Date(Date.parse(event.endDate));
+    endDate.setDate(endDate.getDate() + 1);
+    const endDateString = endDate.toISOString().split("T")[0];
     return {
       title: `${event.user.name}'s vacation (${event.state.toLowerCase()})`,
       start: event.startDate,
-      end: event.endDate,
+      end: endDateString,
     };
   });
 

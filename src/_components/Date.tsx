@@ -17,14 +17,14 @@ const Date = () => {
     const params = new URLSearchParams(searchParams);
     if (newValue?.endDate == undefined || newValue.startDate == undefined)
       throw new Error("Date is wrong!");
-    const endDateForDb = new window.Date();
-
-    endDateForDb?.setDate(newValue?.endDate?.getDate() + 1);
     params.set(
       "startDate",
       newValue?.startDate?.toISOString().split("T")[0] as string,
     );
-    params.set("endDate", endDateForDb?.toISOString().split("T")[0] as string);
+    params.set(
+      "endDate",
+      newValue?.endDate?.toISOString().split("T")[0] as string,
+    );
 
     replace(`${pathname}?${params.toString()}`);
   }
