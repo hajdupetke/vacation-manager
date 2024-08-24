@@ -24,9 +24,9 @@ The application is run using Docker, if you don't have docker installed you can 
 
 ### Homepage
 
-After starting up the application the you start out on the homepage with the Calendar view. On the top right of the page the is a Sign In button to sign in to the application using your Google account. After authenticating an Administrator user needs to approve your registration in order to access other features of the app. 
+After starting up the application the you start out on the homepage with the Calendar view. On the top right of the page the is a Sign In button to sign in to the application using your Google account. After authenticating an Administrator user needs to approve your registration in order to access other features of the app. If there are no Adminstrator account connect to the database with a database viewer application like DBeaver, and modify an existing user so that they become an Administrator.git
 
-After approval the will be a new button on the homepage to the north of the calendar. Clicking this button takes you to a new page where you can create a new leave request by selecting a range of dates and a category. 
+After approval the will be a new button on the homepage to the north of the calendar. Clicking this button takes you to a new page where you can create a new leave request by selecting a range of dates and a category.
 
 ## Users page
 
@@ -45,7 +45,6 @@ On this page there will be a list of all the leave requests. The administrator c
 Only Administrator users can access this page.
 
 On this page there will be a list of all the categories. The administrator can delete a category by clicking the 'Delete' button right next to category. In order to create a category click the 'Create new' button and fill out the name field and click 'Create' button.
-
 
 ## Settings page
 
