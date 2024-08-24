@@ -80,8 +80,8 @@ model LeaveRequest {
     id          Int @id @default(autoincrement())
     userId      String
     user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    startDate   DateTime
-    endDate     DateTime
+    startDate   String
+    endDate     String
     state       LeaveState @default(PENDING)
     categoryId  Int
     category    LeaveCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
